@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://127.0.0.1:3306/order_food
+  jpa:
+    show-sql: true
+server:
+  servlet:
+    context-path: /sell
+#logging:
+ # pattern:
+  #  console: "%d - %d - %msg%n"
+  ##path: /var/log/tomcat/
+  #file: /var/log/tomcat/sell.log
+  #level:
+#  com.lizhiyu.sell.LoggerTest: debug
