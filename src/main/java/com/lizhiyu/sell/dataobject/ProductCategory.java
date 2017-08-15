@@ -1,6 +1,9 @@
 package com.lizhiyu.sell.dataobject;
 
 
+
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,8 +13,8 @@ import javax.persistence.Id;
  * Created by lzy on 17-8-13.
  */
 @Entity
+@DynamicUpdate
 public class ProductCategory {
-
 
 	/** 类目id. */
 	@Id
@@ -23,6 +26,15 @@ public class ProductCategory {
 
 	/** 类目编号. */
 	private Integer categoryType;
+
+	public ProductCategory() {
+
+	}
+
+	public ProductCategory(String categoryName, Integer categoryType) {
+		this.categoryName = categoryName;
+		this.categoryType = categoryType;
+	}
 
 	public Integer getCategoryId() {
 		return categoryId;
