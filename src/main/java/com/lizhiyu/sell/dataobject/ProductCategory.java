@@ -60,6 +60,7 @@ public class ProductCategory {
 		this.categoryType = categoryType;
 	}
 
+
 	@Override
 	public String toString() {
 		return "ProductCategory{" +
