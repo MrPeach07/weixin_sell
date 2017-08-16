@@ -26,7 +26,7 @@ public class ProductInfoVO {
 	private String productDescription;
 
 	@JsonProperty("icon")
-	private String productInco;
+	private String productIcon;
 
 	public String getProductId() {
 		return productId;
@@ -60,11 +60,11 @@ public class ProductInfoVO {
 		this.productDescription = productDescription;
 	}
 
-	public String getProductInco() {
-		return productInco;
+	public String getProductIcon() {
+		return productIcon;
 	}
 
-	public void setProductInco(String productInco) {
-		this.productInco = productInco;
+	public void setProductIcon(String productIcon) {
+		this.productIcon= productIcon;
 	}
 }
