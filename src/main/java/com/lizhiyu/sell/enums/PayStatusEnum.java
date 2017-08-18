@@ -1,16 +1,11 @@
-
 package com.lizhiyu.sell.enums;
 
 /**
- * Created by lzy on 17-8-15.
+ * Created by lzy on 17-8-16.
  */
-
-/**
- * 商品状态
- */
-public enum ProductStatusEnum {
-	UP(0,"在架"),
-	DOWN(1,"下架")
+public enum PayStatusEnum {
+	WAIT(0, "等待支付"),
+	SUCCESS(1, "支付成功"),
 	;
 
 	private Integer code;
@@ -25,8 +20,10 @@ public enum ProductStatusEnum {
 		return message;
 	}
 
-	ProductStatusEnum(Integer code, String message) {
+	PayStatusEnum(Integer code, String message) {
 		this.code = code;
 		this.message = message;
 	}
+
+
 }
