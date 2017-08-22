@@ -27,14 +27,14 @@ public class ProductCategoryRepositoryTest {
 	@Test
 	@Transactional
 	public void findOneTest() {
-		ProductCategory productCategory = repository.getOne(4);
+		ProductCategory productCategory = repository.getOne(3);
 		System.out.println(productCategory.toString());
 	}
 
 	@Test
 	@Transactional
 	public void saveTest() {
-		ProductCategory productCategory = new ProductCategory("女生最爱",4);
+		ProductCategory productCategory = new ProductCategory("女生最爱",2);
 		ProductCategory result = repository.save(productCategory);
 		Assert.assertNotNull(result);
 		// Assert.assertNotEquals(null,result);
