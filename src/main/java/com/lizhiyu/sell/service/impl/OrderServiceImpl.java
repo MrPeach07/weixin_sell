@@ -1,5 +1,6 @@
 package com.lizhiyu.sell.service.impl;
 
+import com.lizhiyu.sell.converter.OrderMasterToOrderDTOConverter;
 import com.lizhiyu.sell.dataobject.OrderDetail;
 import com.lizhiyu.sell.dataobject.OrderMaster;
 import com.lizhiyu.sell.dataobject.ProductInfo;
@@ -17,6 +18,7 @@ import com.lizhiyu.sell.util.KeyUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -91,12 +93,31 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public OrderDTO findOne(String orderId) {
-		return null;
+
+		OrderMaster orderMaster = orderMasterRepository.getOne(orderId);
+		if (orderMaster == null) {
+			throw new SellException(ResultEnum.ORDER_NOT_EXIST);
+		}
+
+		List<OrderDetail> orderDetailList = orderDetailRepository.findByOrderId(orderId);
+		if (orderDetailList.isEmpty()) {
+			throw new SellException(ResultEnum.ORDERDETAIL_NOT_EXIST);
+		}
+		OrderDTO orderDTO = new OrderDTO();
+		BeanUtils.copyProperties(orderMaster,orderDTO);
+		orderDTO.setOrderDetailList(orderDetailList);
+
+		return orderDTO;
+
 	}
 
 	@Override
 	public Page<OrderDTO> findList(String buyerOpenid, Pageable pageable) {
-		return null;
+		Page<OrderMaster> orderMasterPage = orderMasterRepository.findByBuyerOpenid(buyerOpenid,pageable);
+
+		List<OrderDTO> orderDTOList = OrderMasterToOrderDTOConverter.convert(orderMasterPage.getContent());
+
+		return new PageImpl<OrderDTO>(orderDTOList,pageable,orderMasterPage.getTotalElements());
 	}
 
 	@Override
