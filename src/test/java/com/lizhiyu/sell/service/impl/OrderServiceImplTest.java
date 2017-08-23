@@ -2,6 +2,8 @@ package com.lizhiyu.sell.service.impl;
 
 import com.lizhiyu.sell.dataobject.OrderDetail;
 import com.lizhiyu.sell.dto.OrderDTO;
+import com.lizhiyu.sell.enums.OrderStatusEnum;
+import com.lizhiyu.sell.enums.PayStatusEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
@@ -71,18 +73,27 @@ public class OrderServiceImplTest {
 	}
 
 	@Test
+	@Transactional
 	public void cancel() throws Exception {
-
+		OrderDTO orderDTO = orderService.findOne(ORDER_ID);
+		OrderDTO result = orderService.cancel(orderDTO);
+		Assert.assertEquals(OrderStatusEnum.CANCEL.getCode(), result.getOrderStatus());
 	}
 
 	@Test
+	@Transactional
 	public void finish() throws Exception {
-
+		OrderDTO orderDTO = orderService.findOne(ORDER_ID);
+		OrderDTO result = orderService.finish(orderDTO);
+		Assert.assertEquals(OrderStatusEnum.FINISHED.getCode(), result.getOrderStatus());
 	}
 
 	@Test
+	@Transactional
 	public void paid() throws Exception {
-
+		OrderDTO orderDTO = orderService.findOne(ORDER_ID);
+		OrderDTO result = orderService.paid(orderDTO);
+		Assert.assertEquals(PayStatusEnum.SUCCESS.getCode(), result.getPayStatus());
 	}
 
 }
