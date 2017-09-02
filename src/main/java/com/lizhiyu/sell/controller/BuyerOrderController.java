@@ -6,6 +6,7 @@ import com.lizhiyu.sell.dto.OrderDTO;
 import com.lizhiyu.sell.enums.ResultEnum;
 import com.lizhiyu.sell.exception.SellException;
 import com.lizhiyu.sell.form.OrderForm;
+import com.lizhiyu.sell.service.BuyerService;
 import com.lizhiyu.sell.service.OrderService;
 import com.lizhiyu.sell.util.ResultVOUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +33,9 @@ public class BuyerOrderController {
 
 	@Autowired
 	private OrderService orderService;
+
+	@Autowired
+	private BuyerService buyerService;
 
 	//创建订单
 	@PostMapping("/create")
@@ -79,8 +83,7 @@ public class BuyerOrderController {
 	@GetMapping("/detail")
 	public ResultVO<OrderDTO> detail(@RequestParam("openid") String openid,
 									 @RequestParam("orderId") String orderId) {
-		//TODO 不安全的做法,越权访问，需要改进
-		OrderDTO orderDTO = orderService.findOne(orderId);
+		OrderDTO orderDTO = buyerService.findOrderOne(openid,orderId);
 		return ResultVOUtil.success(orderDTO);
 	}
 
@@ -89,9 +92,7 @@ public class BuyerOrderController {
 	public ResultVO cancel(@RequestParam("openid") String openid,
 						   @RequestParam("orderId") String orderId) {
 		//TODO 不安全的做法，改进
-		OrderDTO orderDTO = orderService.findOne(orderId);
-		orderService.cancel(orderDTO);
-
+		OrderDTO orderDTO = buyerService.findOrderOne(openid,orderId);
 		return ResultVOUtil.success();
 	}
 }
