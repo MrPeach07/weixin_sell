@@ -1,6 +1,8 @@
 package com.lizhiyu.sell.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.lizhiyu.sell.dataobject.OrderDetail;
+import com.lizhiyu.sell.util.serializer.DateToLongSerializer;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -9,6 +11,7 @@ import java.util.List;
 /**
  * Created by lzy on 17-8-18.
  */
+//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class OrderDTO {
 
 	/** 订单id. */
@@ -36,9 +39,11 @@ public class OrderDTO {
 	private Integer payStatus;
 
 	/** 创建时间. */
+	@JsonSerialize(using = DateToLongSerializer.class)
 	private Date createTime;
 
 	/** 更新时间. */
+	@JsonSerialize(using = DateToLongSerializer.class)
 	private Date updateTime;
 
 	List<OrderDetail> orderDetailList;

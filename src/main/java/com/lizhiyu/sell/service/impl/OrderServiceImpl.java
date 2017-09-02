@@ -58,7 +58,7 @@ public class OrderServiceImpl implements OrderService {
 		for (OrderDetail orderDetail:orderDTO.getOrderDetailList()) {
 			ProductInfo productInfo = productService.findOne(orderDetail.getProductId());
 			if (productInfo ==null ) {
-				throw new SellException(ResultEnum.PROCUCT_NOT_EXIST);
+				throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
 			}
 
 			//2.计算总价
@@ -78,8 +78,8 @@ public class OrderServiceImpl implements OrderService {
 
 		//3.写入订单数据库(OrderMaster和OrderDetail)
 		OrderMaster orderMaster = new OrderMaster();
+		orderDTO.setOrderId(orderId);
 		BeanUtils.copyProperties(orderDTO, orderMaster);
-		orderMaster.setOrderId(orderId);
 		orderMaster.setOrderAmount(orderAmount);
 		orderMaster.setOrderStatus(OrderStatusEnum.NEW.getCode());
 		orderMaster.setPayStatus(PayStatusEnum.WAIT.getCode());
@@ -104,7 +104,7 @@ public class OrderServiceImpl implements OrderService {
 
 		List<OrderDetail> orderDetailList = orderDetailRepository.findByOrderId(orderId);
 		if (orderDetailList.isEmpty()) {
-			throw new SellException(ResultEnum.ORDERDETAIL_NOT_EXIST);
+			throw new SellException(ResultEnum.ORDER_DETAIL_NOT_EXIST);
 		}
 		OrderDTO orderDTO = new OrderDTO();
 		BeanUtils.copyProperties(orderMaster,orderDTO);

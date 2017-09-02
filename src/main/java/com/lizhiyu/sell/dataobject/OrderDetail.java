@@ -30,7 +30,7 @@ public class OrderDetail {
 	private Integer productQuantity;
 
 	/** 商品小图. */
-	private String prodctIcon;
+	private String productIcon;
 
 	public String getDetailId() {
 		return detailId;
@@ -81,11 +81,11 @@ public class OrderDetail {
 	}
 
 	public String getProdctIcon() {
-		return prodctIcon;
+		return productIcon;
 	}
 
 	public void setProdctIcon(String prodctIcon) {
-		this.prodctIcon = prodctIcon;
+		this.productIcon = prodctIcon;
 	}
 
 	public OrderDetail() {

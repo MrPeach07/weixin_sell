@@ -7,6 +7,7 @@ package com.lizhiyu.sell.VO;
 /**
  * http请求返回的最外层对象
  */
+//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResultVO<T> {
 
 	/** 错误码. */

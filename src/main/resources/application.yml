@@ -8,9 +8,12 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+  jackson:
+    default-property-inclusion: non_null
 server:
   servlet:
     context-path: /sell
+  port: 8080
 #logging:
  # pattern:
   #  console: "%d - %d - %msg%n"
