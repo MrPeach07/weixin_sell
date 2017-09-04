@@ -35,4 +35,5 @@ dependencies {
 	compile('mysql:mysql-connector-java:5.1.38')
 	compile('org.projectlombok:lombok')
 	compile('com.google.code.gson:gson:2.8.1')
+	compile('org.springframework.boot:spring-boot-starter-freemarker:1.5.6.RELEASE')
 }
